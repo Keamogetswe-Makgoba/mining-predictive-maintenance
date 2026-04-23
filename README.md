@@ -1,3 +1,5 @@
+🚀 **Live Demo:** [Click here to view the interactive dashboard](https://keamo-mining-monitor.streamlit.app)
+
 Project Title: Mining Equipment Predictive Maintenance Analysis.
 
 Objective: To identify the primary causes of mechanical failure in mining telemetry data.
