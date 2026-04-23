@@ -34,25 +34,23 @@ print(f"Average Torque for Failed: {failed_machines['Torque [Nm]'].mean():.2f}")
 plt.figure(figsize=(8, 6))
 df.boxplot(column='Torque [Nm]', by='Target')
 
-# Adding labels to make it professional
+
 plt.title('Torque Distribution: Healthy (0) vs. Failed (1)')
-plt.suptitle('') # Remove the default pandas title
+plt.suptitle('') 
 plt.xlabel('Machine Status (0=Healthy, 1=Failed)')
 plt.ylabel('Torque [Nm]')
 
-# 2. Save the chart so you can look at it
+
 plt.savefig('torque_comparison.png')
 print("\n✅ Chart saved as 'torque_comparison.png'!")
 
-# 1. Calculate the Temperature Difference (Process - Air)
-# This is a "Feature Engineering" step—creating new info from old info!
+
 df['Temp Diff'] = df['Process temperature [K]'] - df['Air temperature [K]']
 
 print("\n--- Temperature Difference Analysis ---")
 print(f"Avg Temp Diff for Healthy: {df[df['Target'] == 0]['Temp Diff'].mean():.2f} K")
 print(f"Avg Temp Diff for Failed: {df[df['Target'] == 1]['Temp Diff'].mean():.2f} K")
 
-# 2. Visualize Temperature vs Torque
 plt.figure(figsize=(10, 6))
 plt.scatter(df['Torque [Nm]'], df['Air temperature [K]'], c=df['Target'], cmap='coolwarm', alpha=0.5)
 plt.title('Torque vs. Air Temperature (Red = Failed)')
@@ -62,14 +60,14 @@ plt.colorbar(label='Failure (1=Yes, 0=No)')
 plt.savefig('torque_vs_temp.png')
 print("\n✅ Scatter plot saved as 'torque_vs_temp.png'!")
 
-# 1. Analyze the types of failures
+
 print("\n--- Breakdown of Failure Types ---")
-# We filter out 'No Failure' to see only the actual problems
+
 real_failures = df[df['Failure Type'] != 'No Failure']
 failure_summary = real_failures['Failure Type'].value_counts()
 print(failure_summary)
 
-# 2. Visualize the Failure Types
+
 plt.figure(figsize=(10, 6))
 failure_summary.plot(kind='bar', color='salmon')
 plt.title('Frequency of Specific Mining Equipment Failures')
